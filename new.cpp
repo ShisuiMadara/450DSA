@@ -6,9 +6,23 @@ const int MOD= 1000000007;
 
 void solve()
 {
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
 
+    if(n == 1)
+    {
+        cout<<-1<<'\n';
+        return;
+    }
+
+    if(n%2 == 0)
+    {
+        cout<<0<<" "<<0<<" "<<n/2<<'\n';
+        return;
+    }
+    
+    cout<<<<" "<<(n-1)/2<<" "<<(n-1)/2<<'\n';
+    return;
     
 }
 
@@ -18,7 +32,7 @@ signed main()
 
 
      ll test=1;
-    //cin>>test;
+    cin>>test;
     while(test--)
     {
         solve();
