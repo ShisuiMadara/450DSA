@@ -40,7 +40,7 @@ public:
 	            freq[txt[right]-'a']++;
 	    }
 	    
-	    return ans;`
+	    return ans;
 	}
 
 };
