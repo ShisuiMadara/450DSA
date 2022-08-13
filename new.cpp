@@ -6,24 +6,53 @@ const int MOD= 1000000007;
 
 void solve()
 {
-    int n;
-    cin>>n;
+    
 
-    if(n == 1)
+    int h1,w1;
+    cin>>h1>>w1;
+
+    vector<vector<int>>arr(h1, vector<int>(w1));
+
+    for(int i = 0; i<h1; ++i)
     {
-        cout<<-1<<'\n';
+        for(int j= 0; j<w1; ++j)
+        {
+            cin>>arr[i][j];
+        }
+    }
+
+    int h2,w2;
+    cin>>h2>>w2;
+
+    vector<vector<int>>t(h2, vector<int>(w2));
+
+    for(int i = 0; i<h2; ++i)
+    {
+        for(int j = 0; j<w2; ++j)
+        {
+            cin>>t[i][j];
+        }
+    }
+
+    if(h1 < h2 || w1 < w2)
+    {
+        cout<<"No";
         return;
     }
 
-    if(n%2 == 0)
+    for(int i = 0; i<h2; ++i)
     {
-        cout<<0<<" "<<0<<" "<<n/2<<'\n';
-        return;
+        for(int j = 0; j<h2; ++j)
+        {
+            for(int k = 0; k<h1; ++k)
+            {
+                for(int l = 0; l<w2; ++l)
+                {
+                    if()
+                }
+            }
+        }
     }
-    
-    cout<<<<" "<<(n-1)/2<<" "<<(n-1)/2<<'\n';
-    return;
-    
 }
 
 signed main() 
@@ -32,7 +61,7 @@ signed main()
 
 
      ll test=1;
-    cin>>test;
+    //cin>>test;
     while(test--)
     {
         solve();
