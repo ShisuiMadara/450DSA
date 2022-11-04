@@ -12,27 +12,18 @@ void solve()
 
     vector<int>arr(n);
 
-    for(auto&c:arr)cin>>c;
+    for(auto&c:arr) cin>>c;
 
-    int cnt = 1;
-
-    if(n == 0) {
-        cout<<cnt;
-        return;
+    int pre_sum = arr[0];
+    int ans = arr[0];
+        
+    for(int i = 1; i< n; ++i)
+    {
+        pre_sum = max(pre_sum+arr[i], arr[i]);
+        ans = max(ans, pre_sum);
     }
-
-    int min = arr[0];
-
-    for(int i = 1; i< n; ++i) {
-        if(arr[i] < min) {
-            cnt ++;
-        }
-        min = arr[i];
-    }
-
-
-    cout<<cnt;
-    return;
+    
+    ans == INT_MIN ? cout<<-1 : cout<<ans;
 }
 
 
