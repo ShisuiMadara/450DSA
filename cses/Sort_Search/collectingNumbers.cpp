@@ -7,32 +7,24 @@ const int MOD= 1000000007;
 
 void solve()
 {
-    int n;
-    cin>>n;
+  int n,ans=1 ;
+  cin >> n ;
+  vector<int>a(n),b(n);
 
-    vector<int>arr(n);
+  for(int &x:a) {
+    cin >> x;
+    x--;
+  }
 
-    for(auto&c:arr)cin>>c;
+  for(int i=0;i<n;i++)
+    b[a[i]]=i ;
 
-    int cnt = 1;
+  for(int i=1;i<n;i++) {
+    ans+=b[i]<b[i-1];
+  }
 
-    if(n == 0) {
-        cout<<cnt;
-        return;
-    }
+  cout << ans  ;
 
-    int min = arr[0];
-
-    for(int i = 1; i< n; ++i) {
-        if(arr[i] < min) {
-            cnt ++;
-        }
-        min = arr[i];
-    }
-
-
-    cout<<cnt;
-    return;
 }
 
 
