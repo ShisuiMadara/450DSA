@@ -36,7 +36,7 @@ int solve(int n, int m, vector<int>& v)
     return ans;
 }
  
-int main() {
+signed main() {
 
    ll t,n,m,x,i,j,k,q;
    //cin >> t;
