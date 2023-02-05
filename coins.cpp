@@ -4,36 +4,40 @@ using namespace std;
 //const int inf=1000000000000000000;
 const int mod=998244353; 
 //const int mod=1000000007;
+typedef long long ll;
+
+
+double dp[3003][3003],a[3003];
+ll n;
+ 
 void solve() {
-
-    int n;
-    cin >> n;
-
-    vector<double> p(n);
-    for(auto&c:p)
-        cin >> c;
+ 
+    cin>>n;
     
-    vector<vector<double>> dp(n+1, vector<double>(n+1));
- 
-    dp[0][0] = 1.0;
- 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            if(i < j) {
-                continue;
-            }
-            dp[i+1][j] += dp[i][j] * (1.0 - p[i]);
-            dp[i+1][j+1] += dp[i][j] * p[i];
+    for(int i=1;i<=n;i++)
+        cin>>a[i];
+    
+    memset(dp,0,sizeof(dp));
+    dp[0][0] = 1;
+    
+    for(int i=1;i<=n;i++)
+    {
+        dp[i][0] = dp[i-1][0] * (1 - a[i]);
+        
+        for(int heads = 1;heads <= i; heads++)
+        {
+            dp[i][heads] = a[i] * (dp[i-1][heads - 1]) + (1 - a[i]) * (dp[i-1][heads]);
         }
     }
- 
-    double ans = 0.0;
- 
-    for(int i = n / 2 + 1; i <= n; i++){
+    
+    double ans = 0;
+    
+    for(int i=n/2 + 1;i <= n;i++)
+    {
         ans += dp[n][i];
     }
- 
-    cout << setprecision(9) << ans;
+    
+    cout<<setprecision(10)<<ans;
     
 }
 
