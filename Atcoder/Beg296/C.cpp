@@ -3,33 +3,29 @@ using namespace std;
 
 #define int long long
 
+
 signed main() {
-
-    int n,x;
-    cin>>n>>x;
-
-    vector<int>arr(n);
-
-    for(auto&c:arr)cin>>c;
-
-    map<int,int>mp;
-
-    for(int i = 0; i<n; ++i) {
-        mp[arr[i]] ++;
+    int n, a, b;
+    cin >> n >> a >> b;
+    vector<int> h(n);
+    for (int i = 0; i < n; i++) {
+        cin >> h[i];
     }
-
-    for(int i = 0; i< n; ++i) {
-        // cout<<arr[i]+x<<" ";
-        // cout<<mp[arr[i] + x]<<endl;
-        if(mp[arr[i] + x]) {
-            // cout<<arr[i]<<" "<<arr[i]+x <<" "<<arr[i]-x<<endl;
-            cout<<"Yes";
-            return 0;
+    sort(h.rbegin(), h.rend());  // sort zombies in decreasing order of health
+    priority_queue<int, vector<int>, greater<int>> pq;  // heap to store number of attacks needed for each zombie
+    for (int i = 0; i < n; i++) {
+        pq.push(ceil(h[i] / (double) b));
+    }
+    int attacks = 0;
+    while (!pq.empty()) {
+        int num_attacks = pq.top();  // number of attacks needed for next zombie
+        pq.pop();
+        if (num_attacks > attacks) {  // if this zombie hasn't been attacked enough yet
+            int remaining_attacks = num_attacks - attacks;
+            attacks += remaining_attacks;
+            pq.push(ceil((h[0] - attacks * a) / (double) b));  // decrease health of all zombies and update heap
         }
     }
-
-    cout<<"No";
-
- 
+    cout << attacks << endl;
     return 0;
 }

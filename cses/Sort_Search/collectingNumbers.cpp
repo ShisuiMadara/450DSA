@@ -7,7 +7,7 @@ const int MOD= 1000000007;
 
 void solve()
 {
-  int n,ans=1 ;
+  int n,ans=3 ;
   cin >> n ;
   vector<int>a(n),b(n);
 
