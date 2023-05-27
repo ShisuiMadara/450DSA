@@ -1,72 +1,77 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-#define int long long
-
-int g[500][500];
-int dp[500][500];
-
-void fw (int n) {
-
-    for(int i = 0;i<500; ++i) {
-        for(int j = 0; j<500; ++j) {
-            dp[i][j] = INT_MAX;
+ 
+ 
+typedef long long ll;
+const int MAX_N = 1e4 +10;
+const ll INF = 1e18;
+int n;
+ 
+ll dist[MAX_N][MAX_N];
+ 
+void floyd()
+{
+ 
+  for(int step = 1; step<=n; ++step)
+  {
+    for(int from = 1; from<=n; ++from)
+    {
+      for(int to = 1; to<=n; ++to)
+      {
+        if(dist[from][step] < INF && dist[step][to] < INF )
+        {
+          dist[from][to] = min(dist[from][to], dist[from][step] + dist[step][to]);
         }
+      }
     }
-
-    for(int i = 0; i<n; ++i) {
-        for(int j = 0; j<n; ++j) {
-            if (i == j) {
-                dp[i][j] = 0;
-                continue;
-            }
-            dp[i][j] = min(dp[i][j], g[i][j]);
-        }
-    }
-
-    for(int i = 0;i<n; ++i) {
-        for(int j = 0; j<n; ++j) {
-            cout<<dp[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-
-
-    for (int k= 0; k<n; ++k) {
-        for (int i = 0; i<n; ++i) {
-            for (int j = 0; j<n; ++j) {
-                if (dp[i][k] != INT_MAX && dp[k][j] != INT_MAX) 
-                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
-            }
-        }
-    }
+  }
 }
-
-
-signed main() {
-    int n, m, q;
-    cin>>n>>m>>q;
-    for(int i = 0;i<500; ++i) {
-        for(int j = 0; j<500; ++j) {
-            g[i][j] = INT_MAX;
-        }
+ 
+ 
+ 
+int main()
+{
+  int m;
+  cin>>n>>m;
+  int q;
+  cin>>q;
+  for(int i = 1; i<=n; ++i)
+  {
+    for(int j = 1; j<=n; ++j)
+    {
+      dist[i][j] = INF;
     }
-
-    for (int i = 0; i<m; ++i) {
-        int a, b, c;
-        cin>>a>>b>>c;
-
-        g[a][b] = c;
-        g[b][a] = c;
-
+  }
+ 
+  for(int i = 0; i<m; ++i)
+  {
+    ll a,b,c;
+    cin>>a>>b>>c;
+ 
+    dist[a][a] = 0;
+    dist[b][b] = 0;
+    dist[a][b] = min(dist[a][b], c);
+    dist[b][a] = min(dist[b][a], c);
+    
+  }
+ 
+  floyd();
+ 
+  while(q--)
+  {
+    int a,b;
+    cin>>a>>b;
+ 
+    if(dist[a][b] < INF)
+    {
+      cout<<dist[a][b]<<'\n';
     }
-
-    fw(n);
-
-    while(q--) {
-        int a, b;
-        cin>>a>>b;
-
-        cout<<((dp[a][b] == INT_MAX) ? -1 : dp[a][b])<<endl;
+    else
+    {
+      cout<<-1<<'\n';
     }
+  }
+ 
+  return 0;
+  
 }
